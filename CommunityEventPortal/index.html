@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Community Event Portal</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+</head>
+
+<body onbeforeunload="return warningMessage()">
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Community Portal
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#home">Home</a>
+            <a href="#stats">About</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Register</a>
+            <a href="#location">Location</a>
+            <a href="help.html" target="_blank">Help</a>
+
+        </div>
+
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section id="home">
+
+        <div id="welcomeBanner">
+
+            <h1>
+                Welcome to Local Community Event Portal
+            </h1>
+
+            <p class="highlight">
+                Connecting Residents Through Culture, Sports, Arts & Community Activities
+            </p>
+
+            <p>
+                <span style="color:#ffd700;font-weight:bold;">
+                    🎉 Special Offer: First 50 Registrations Get Free Entry!
+                </span>
+            </p>
+
+            <a href="#contact" class="hero-btn">
+                Register Now
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Statistics -->
+
+    <section id="stats" class="stats">
+
+        <div class="stat-card">
+            <h2>500+</h2>
+            <p>Events Hosted</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>10,000+</h2>
+            <p>Residents Joined</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>50+</h2>
+            <p>Community Partners</p>
+        </div>
+
+    </section>
+
+    <!-- Events -->
+
+    <section id="events">
+
+        <h2 class="section-title">
+            Upcoming Community Events
+        </h2>
+
+        <div class="gallery">
+
+            <div class="event-card">
+
+                <img src="https://picsum.photos/400/250?1" alt="Music Festival" ondblclick="enlargeImage(this)">
+
+                <h3>Music Festival</h3>
+
+                <p>
+                    Enjoy live performances from talented local artists.
+                </p>
+
+            </div>
+
+            <div class="event-card">
+
+                <img src="https://picsum.photos/400/250?2" alt="Food Carnival" ondblclick="enlargeImage(this)">
+
+                <h3>Food Carnival</h3>
+
+                <p>
+                    Taste delicious food from around the city.
+                </p>
+
+            </div>
+
+            <div class="event-card">
+
+                <img src="https://picsum.photos/400/250?3" alt="Sports Day" ondblclick="enlargeImage(this)">
+
+                <h3>Sports Day</h3>
+
+                <p>
+                    Participate in exciting sports competitions.
+                </p>
+
+            </div>
+
+        </div>
+        <section id="events">
+
+            <h2 class="section-title">
+                Upcoming Community Events
+            </h2>
+
+            <!-- Search and Filter Controls -->
+
+            <div class="event-controls">
+
+                <input type="text" id="searchInput" placeholder="🔍 Search Events">
+
+                <select id="categoryFilter">
+
+                    <option value="Music">Music</option>
+                    <option value="Food">Food</option>
+                    <option value="Sports">Sports</option>
+
+                </select>
+
+            </div>
+
+            <!-- Dynamic Event Cards -->
+
+            <div id="eventContainer"></div>
+
+
+        </section>
+
+        <!-- Registration Form -->
+
+        <section id="contact">
+
+            <h2 class="section-title">
+                Event Registration
+            </h2>
+
+            <form id="eventForm">
+
+                <label>Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required autofocus>
+
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label>Phone Number</label>
+                <input type="text" id="phone" placeholder="Enter phone number" onblur="validatePhone()">
+
+                <label>Event Date</label>
+                <input type="date" required>
+
+                <label>Event Type</label>
+
+                <select id="eventType" onchange="showFee()">
+
+                    <option value="">Select Event</option>
+                    <option value="Music">Music Festival</option>
+                    <option value="Food">Food Carnival</option>
+                    <option value="Sports">Sports Day</option>
+
+                </select>
+
+                <p id="feeDisplay"></p>
+
+                <label>Feedback</label>
+
+                <textarea id="feedback" placeholder="Enter feedback" onkeyup="countCharacters()"></textarea>
+
+                <p>
+                    Character Count:
+                    <span id="charCount">0</span>
+                </p>
+
+                <button type="button" onclick="showConfirmation()">
+                    Register Event
+                </button>
+
+                <br><br>
+
+                <output id="outputMessage"></output>
+
+            </form>
+
+        </section>
+
+        <!-- Video -->
+
+        <section>
+
+            <h2 class="section-title">
+                Event Promo Video
+            </h2>
+
+            <div class="video-container">
+
+                <video controls oncanplay="videoReady()">
+
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+
+                </video>
+
+                <p id="videoMessage"></p>
+
+            </div>
+
+        </section>
+
+        <!-- Location -->
+
+        <section id="location">
+
+            <h2 class="section-title">
+                Find Nearby Events
+            </h2>
+
+            <div class="location-box">
+
+                <button onclick="findLocation()">
+                    Find Nearby Events
+                </button>
+
+                <p id="locationResult"></p>
+
+            </div>
+
+        </section>
+
+        <!-- Preferences -->
+
+        <section>
+
+            <div class="location-box">
+
+                <button onclick="clearPreferences()">
+                    Clear Preferences
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+
+        <footer>
+
+            <h3>Local Community Event Portal</h3>
+
+            <p>
+                Bringing communities together through events,
+                activities and engagement.
+            </p>
+
+            <p>
+                © 2026 Community Portal | HTML5 & CSS3 Project
+            </p>
+
+        </footer>
+
+        <script>
+
+            console.log("Portal Loaded Successfully");
+
+            function validatePhone() {
+
+                let phone =
+                    document.getElementById("phone").value;
+
+                if (!/^\d{10}$/.test(phone)) {
+
+                    alert(
+                        "Please enter a valid 10-digit phone number."
+                    );
+                }
+            }
+
+            function showFee() {
+
+                let event =
+                    document.getElementById("eventType").value;
+
+                let fee = "";
+
+                if (event === "Music")
+                    fee = "Event Fee: ₹500";
+
+                else if (event === "Food")
+                    fee = "Event Fee: ₹400";
+
+                else if (event === "Sports")
+                    fee = "Event Fee: ₹300";
+
+                document.getElementById("feeDisplay")
+                    .innerHTML = fee;
+
+                localStorage.setItem(
+                    "preferredEvent",
+                    event
+                );
+            }
+
+            function showConfirmation() {
+
+                document.getElementById("outputMessage")
+                    .innerHTML =
+                    "✅ Registration Successful!";
+
+                document.getElementById("eventForm")
+                    .reset();
+            }
+
+            function enlargeImage(img) {
+
+                img.classList.toggle("zoom");
+            }
+
+            function countCharacters() {
+
+                let text =
+                    document.getElementById("feedback").value;
+
+                document.getElementById("charCount")
+                    .innerHTML = text.length;
+            }
+
+            function videoReady() {
+
+                document.getElementById("videoMessage")
+                    .innerHTML =
+                    "🎬 Video Ready To Play";
+            }
+
+            function warningMessage() {
+
+                return "Your form may not be submitted.";
+            }
+
+            window.onload = function () {
+
+                let savedEvent =
+                    localStorage.getItem(
+                        "preferredEvent"
+                    );
+
+                if (savedEvent) {
+
+                    document.getElementById(
+                        "eventType"
+                    ).value = savedEvent;
+
+                    showFee();
+                }
+            }
+
+            function clearPreferences() {
+
+                localStorage.clear();
+                sessionStorage.clear();
+
+                alert(
+                    "Preferences Cleared Successfully"
+                );
+            }
+
+            function findLocation() {
+
+                if (navigator.geolocation) {
+
+                    navigator.geolocation.getCurrentPosition(
+
+                        function (position) {
+
+                            document.getElementById(
+                                "locationResult"
+                            ).innerHTML =
+
+                                "Latitude: " +
+                                position.coords.latitude +
+
+                                "<br>Longitude: " +
+                                position.coords.longitude;
+                        },
+
+                        function (error) {
+
+                            alert(
+                                "Location access denied or unavailable."
+                            );
+                        },
+
+                        {
+                            enableHighAccuracy: true,
+                            timeout: 5000
+                        }
+                    );
+                }
+            }
+            displayEvents();
+
+        </script>
+
+</body>
+
+</html>
